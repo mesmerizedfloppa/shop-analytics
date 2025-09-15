@@ -1,0 +1,2496 @@
+{
+  "categories": [
+    {
+      "id": "c001",
+      "name": "Smartphones",
+      "parent_id": null
+    },
+    {
+      "id": "c002",
+      "name": "Laptops",
+      "parent_id": null
+    },
+    {
+      "id": "c003",
+      "name": "Tablets",
+      "parent_id": null
+    },
+    {
+      "id": "c004",
+      "name": "Wearables",
+      "parent_id": null
+    },
+    {
+      "id": "c005",
+      "name": "Audio",
+      "parent_id": null
+    },
+    {
+      "id": "c006",
+      "name": "Cameras",
+      "parent_id": null
+    },
+    {
+      "id": "c007",
+      "name": "Drones",
+      "parent_id": null
+    },
+    {
+      "id": "c008",
+      "name": "PC Components",
+      "parent_id": null
+    },
+    {
+      "id": "c009",
+      "name": "Networking",
+      "parent_id": null
+    },
+    {
+      "id": "c010",
+      "name": "Storage",
+      "parent_id": null
+    },
+    {
+      "id": "c011",
+      "name": "Gaming",
+      "parent_id": null
+    },
+    {
+      "id": "c012",
+      "name": "TV & Home Theater",
+      "parent_id": null
+    }
+  ],
+  "products": [
+    {
+      "id": "p001",
+      "title": "Acer Smartwatch AJI0",
+      "price": 180392,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p002",
+      "title": "Huawei SSD BDIV",
+      "price": 150127,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p003",
+      "title": "Apple External HDD V3A3",
+      "price": 186013,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p004",
+      "title": "Dell Headphones H1DN",
+      "price": 97104,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p005",
+      "title": "Sony Earbuds QE7C",
+      "price": 79854,
+      "category_id": "c011",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p006",
+      "title": "Huawei Camera ZBIK",
+      "price": 23916,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p007",
+      "title": "HP Monitor Q4FM",
+      "price": 178682,
+      "category_id": "c005",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p008",
+      "title": "Huawei Projector G0FN",
+      "price": 170772,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p009",
+      "title": "Acer Mouse 41IB",
+      "price": 85694,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p010",
+      "title": "Samsung Camera 6UZH",
+      "price": 133870,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p011",
+      "title": "LG Monitor F0T0",
+      "price": 115311,
+      "category_id": "c010",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p012",
+      "title": "Asus Drone 9ER1",
+      "price": 31743,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p013",
+      "title": "Acer SSD VNVQ",
+      "price": 68906,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p014",
+      "title": "Acer Earbuds E511",
+      "price": 92174,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p015",
+      "title": "HP Bluetooth Speaker Q85J",
+      "price": 134225,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p016",
+      "title": "Acer Keyboard 4SHN",
+      "price": 45349,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p017",
+      "title": "Huawei Mouse REN9",
+      "price": 83612,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p018",
+      "title": "Apple VR Headset 8DRC",
+      "price": 142645,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p019",
+      "title": "Acer Microphone 8FSV",
+      "price": 58521,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p020",
+      "title": "MSI Keyboard OYN6",
+      "price": 121354,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p021",
+      "title": "Apple Tablet MVIH",
+      "price": 21610,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p022",
+      "title": "Apple Tablet 64CI",
+      "price": 178368,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p023",
+      "title": "Xiaomi Headphones 05UI",
+      "price": 126987,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p024",
+      "title": "Samsung Smartwatch XMO5",
+      "price": 17200,
+      "category_id": "c011",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p025",
+      "title": "Sony Router 02DG",
+      "price": 143584,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p026",
+      "title": "HP Bluetooth Speaker KI7P",
+      "price": 147264,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p027",
+      "title": "Acer Gaming Console 4874",
+      "price": 46597,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p028",
+      "title": "Lenovo Camera 56FA",
+      "price": 105346,
+      "category_id": "c005",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p029",
+      "title": "Dell SSD Z02X",
+      "price": 130577,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p030",
+      "title": "Dell Camera 8UT0",
+      "price": 17985,
+      "category_id": "c001",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p031",
+      "title": "Xiaomi Webcam F8CG",
+      "price": 158984,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p032",
+      "title": "HP Smartwatch 7UUB",
+      "price": 24491,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p033",
+      "title": "Dell Camera YLJE",
+      "price": 172214,
+      "category_id": "c005",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p034",
+      "title": "Asus Graphics Card 7AWU",
+      "price": 29209,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p035",
+      "title": "Xiaomi Monitor EMCI",
+      "price": 77707,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p036",
+      "title": "Xiaomi Powerbank K93T",
+      "price": 178076,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p037",
+      "title": "Acer Smartwatch 7EED",
+      "price": 148024,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p038",
+      "title": "Dell Smart TV HMY4",
+      "price": 135489,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p039",
+      "title": "Sony Tablet W3BM",
+      "price": 37293,
+      "category_id": "c011",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p040",
+      "title": "LG Earbuds PZUE",
+      "price": 184146,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p041",
+      "title": "Asus VR Headset TPBN",
+      "price": 13458,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p042",
+      "title": "Acer Drone YMU5",
+      "price": 165702,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p043",
+      "title": "Apple Bluetooth Speaker 935A",
+      "price": 196085,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p044",
+      "title": "Acer Earbuds 3J2D",
+      "price": 13151,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p045",
+      "title": "Apple External HDD M35I",
+      "price": 176023,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p046",
+      "title": "Asus Monitor 58KX",
+      "price": 107773,
+      "category_id": "c011",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p047",
+      "title": "Sony Smartwatch 5JU9",
+      "price": 13028,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p048",
+      "title": "Asus Earbuds 2P9E",
+      "price": 154149,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p049",
+      "title": "Sony Powerbank PS3Y",
+      "price": 197497,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p050",
+      "title": "Asus SSD CXLL",
+      "price": 35669,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p051",
+      "title": "Xiaomi Keyboard YLZT",
+      "price": 53289,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p052",
+      "title": "Acer Earbuds 6WKT",
+      "price": 3106,
+      "category_id": "c005",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p053",
+      "title": "Apple SSD 2VLP",
+      "price": 180111,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p054",
+      "title": "MSI Bluetooth Speaker XKXW",
+      "price": 27480,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p055",
+      "title": "Apple Camera FB9W",
+      "price": 22091,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p056",
+      "title": "Acer VR Headset GZRI",
+      "price": 174981,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p057",
+      "title": "Samsung Graphics Card PG8S",
+      "price": 16164,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p058",
+      "title": "Samsung External HDD EQTU",
+      "price": 86177,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p059",
+      "title": "Xiaomi External HDD 60RJ",
+      "price": 67812,
+      "category_id": "c011",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p060",
+      "title": "Xiaomi Microphone WJCK",
+      "price": 74228,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p061",
+      "title": "Xiaomi Tablet EIYZ",
+      "price": 19837,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p062",
+      "title": "Asus Gaming Console QC3O",
+      "price": 156112,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p063",
+      "title": "Huawei Router R7KO",
+      "price": 112843,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p064",
+      "title": "Lenovo Drone JRNY",
+      "price": 108989,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p065",
+      "title": "Lenovo Headphones 9T6V",
+      "price": 176801,
+      "category_id": "c001",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p066",
+      "title": "Acer SSD EQBN",
+      "price": 58485,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p067",
+      "title": "Asus Graphics Card 5K8P",
+      "price": 24471,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p068",
+      "title": "MSI Gaming Console B8IC",
+      "price": 173853,
+      "category_id": "c001",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p069",
+      "title": "Apple Camera 4WIR",
+      "price": 32986,
+      "category_id": "c010",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p070",
+      "title": "Lenovo Powerbank JNV8",
+      "price": 191313,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p071",
+      "title": "Dell Smartwatch U7U6",
+      "price": 101384,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p072",
+      "title": "Samsung VR Headset YWD1",
+      "price": 182374,
+      "category_id": "c010",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p073",
+      "title": "Huawei Laptop MPNS",
+      "price": 92451,
+      "category_id": "c001",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p074",
+      "title": "Lenovo Smartwatch PN6Q",
+      "price": 43105,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p075",
+      "title": "MSI Webcam 8J3T",
+      "price": 129745,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p076",
+      "title": "MSI VR Headset J43D",
+      "price": 121175,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p077",
+      "title": "Huawei Smart TV YMRL",
+      "price": 130808,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p078",
+      "title": "Dell Mouse KV5U",
+      "price": 138430,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p079",
+      "title": "Apple Earbuds OTIR",
+      "price": 189605,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p080",
+      "title": "Sony Tablet KOIX",
+      "price": 99736,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p081",
+      "title": "HP Earbuds TMQL",
+      "price": 63434,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p082",
+      "title": "Asus Smartwatch 08YG",
+      "price": 196620,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p083",
+      "title": "MSI VR Headset 9SKD",
+      "price": 53886,
+      "category_id": "c005",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p084",
+      "title": "Asus Bluetooth Speaker KZEB",
+      "price": 17293,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p085",
+      "title": "MSI Headphones W1DA",
+      "price": 77537,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p086",
+      "title": "Lenovo Mouse GB7R",
+      "price": 20129,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p087",
+      "title": "Samsung VR Headset WBFU",
+      "price": 82648,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p088",
+      "title": "Samsung Gaming Console 1V2I",
+      "price": 139989,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p089",
+      "title": "Lenovo Keyboard 49KW",
+      "price": 162811,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p090",
+      "title": "Apple Projector HXFG",
+      "price": 22677,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p091",
+      "title": "HP External HDD YQBK",
+      "price": 77112,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p092",
+      "title": "Samsung Charger IJ2V",
+      "price": 54857,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p093",
+      "title": "Xiaomi Drone X63C",
+      "price": 46495,
+      "category_id": "c005",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p094",
+      "title": "Lenovo Smartwatch QKOJ",
+      "price": 144552,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p095",
+      "title": "Samsung Smart TV BPLJ",
+      "price": 26940,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p096",
+      "title": "Acer Monitor U1GS",
+      "price": 118927,
+      "category_id": "c005",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p097",
+      "title": "Huawei SSD WRDM",
+      "price": 90374,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p098",
+      "title": "LG Mouse ORXO",
+      "price": 147204,
+      "category_id": "c001",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p099",
+      "title": "Samsung Mouse JE15",
+      "price": 3301,
+      "category_id": "c011",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p100",
+      "title": "HP Laptop GN1W",
+      "price": 16529,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p101",
+      "title": "Xiaomi Headphones 7PZE",
+      "price": 168156,
+      "category_id": "c010",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p102",
+      "title": "MSI Bluetooth Speaker LAOI",
+      "price": 32743,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p103",
+      "title": "Acer Headphones RZSJ",
+      "price": 129484,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p104",
+      "title": "Lenovo Gaming Console FGV0",
+      "price": 38784,
+      "category_id": "c002",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p105",
+      "title": "HP Mouse 7S3K",
+      "price": 81264,
+      "category_id": "c010",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p106",
+      "title": "LG External HDD TMTT",
+      "price": 122365,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p107",
+      "title": "MSI Drone UI1B",
+      "price": 198219,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p108",
+      "title": "HP Charger 2XF8",
+      "price": 36094,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p109",
+      "title": "Samsung External HDD D6AF",
+      "price": 174646,
+      "category_id": "c003",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p110",
+      "title": "Lenovo Monitor MYX4",
+      "price": 179778,
+      "category_id": "c009",
+      "tags": [
+        "electronics",
+        "limited"
+      ]
+    },
+    {
+      "id": "p111",
+      "title": "Asus Projector Z15B",
+      "price": 20936,
+      "category_id": "c004",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p112",
+      "title": "Apple Earbuds D91Z",
+      "price": 29347,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p113",
+      "title": "MSI Keyboard 6B2K",
+      "price": 101262,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p114",
+      "title": "Apple Webcam OYGG",
+      "price": 162774,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p115",
+      "title": "Lenovo VR Headset FQJJ",
+      "price": 5463,
+      "category_id": "c008",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p116",
+      "title": "Acer Gaming Console FPMV",
+      "price": 170493,
+      "category_id": "c007",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p117",
+      "title": "Lenovo Keyboard HNRI",
+      "price": 152926,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "popular"
+      ]
+    },
+    {
+      "id": "p118",
+      "title": "MSI Keyboard A3OA",
+      "price": 182778,
+      "category_id": "c012",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    },
+    {
+      "id": "p119",
+      "title": "Huawei Earbuds R6K2",
+      "price": 162138,
+      "category_id": "c006",
+      "tags": [
+        "electronics",
+        "sale"
+      ]
+    },
+    {
+      "id": "p120",
+      "title": "Acer Camera WYZX",
+      "price": 38855,
+      "category_id": "c011",
+      "tags": [
+        "electronics",
+        "new"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "u001",
+      "name": "User 01",
+      "tier": "regular"
+    },
+    {
+      "id": "u002",
+      "name": "User 02",
+      "tier": "VIP"
+    },
+    {
+      "id": "u003",
+      "name": "User 03",
+      "tier": "VIP"
+    },
+    {
+      "id": "u004",
+      "name": "User 04",
+      "tier": "regular"
+    },
+    {
+      "id": "u005",
+      "name": "User 05",
+      "tier": "VIP"
+    },
+    {
+      "id": "u006",
+      "name": "User 06",
+      "tier": "regular"
+    },
+    {
+      "id": "u007",
+      "name": "User 07",
+      "tier": "regular"
+    },
+    {
+      "id": "u008",
+      "name": "User 08",
+      "tier": "VIP"
+    },
+    {
+      "id": "u009",
+      "name": "User 09",
+      "tier": "VIP"
+    },
+    {
+      "id": "u010",
+      "name": "User 10",
+      "tier": "VIP"
+    },
+    {
+      "id": "u011",
+      "name": "User 11",
+      "tier": "regular"
+    },
+    {
+      "id": "u012",
+      "name": "User 12",
+      "tier": "regular"
+    },
+    {
+      "id": "u013",
+      "name": "User 13",
+      "tier": "regular"
+    },
+    {
+      "id": "u014",
+      "name": "User 14",
+      "tier": "VIP"
+    },
+    {
+      "id": "u015",
+      "name": "User 15",
+      "tier": "VIP"
+    },
+    {
+      "id": "u016",
+      "name": "User 16",
+      "tier": "regular"
+    },
+    {
+      "id": "u017",
+      "name": "User 17",
+      "tier": "VIP"
+    },
+    {
+      "id": "u018",
+      "name": "User 18",
+      "tier": "VIP"
+    },
+    {
+      "id": "u019",
+      "name": "User 19",
+      "tier": "VIP"
+    },
+    {
+      "id": "u020",
+      "name": "User 20",
+      "tier": "VIP"
+    },
+    {
+      "id": "u021",
+      "name": "User 21",
+      "tier": "regular"
+    },
+    {
+      "id": "u022",
+      "name": "User 22",
+      "tier": "VIP"
+    },
+    {
+      "id": "u023",
+      "name": "User 23",
+      "tier": "regular"
+    },
+    {
+      "id": "u024",
+      "name": "User 24",
+      "tier": "regular"
+    },
+    {
+      "id": "u025",
+      "name": "User 25",
+      "tier": "regular"
+    },
+    {
+      "id": "u026",
+      "name": "User 26",
+      "tier": "VIP"
+    },
+    {
+      "id": "u027",
+      "name": "User 27",
+      "tier": "VIP"
+    },
+    {
+      "id": "u028",
+      "name": "User 28",
+      "tier": "regular"
+    },
+    {
+      "id": "u029",
+      "name": "User 29",
+      "tier": "VIP"
+    },
+    {
+      "id": "u030",
+      "name": "User 30",
+      "tier": "regular"
+    }
+  ],
+  "orders": [
+    {
+      "id": "o001",
+      "user_id": "u009",
+      "items": [
+        [
+          "p059",
+          2
+        ]
+      ],
+      "total": 135624,
+      "ts": "2025-06-22T09:32:42",
+      "status": "paid"
+    },
+    {
+      "id": "o002",
+      "user_id": "u027",
+      "items": [
+        [
+          "p014",
+          3
+        ],
+        [
+          "p030",
+          2
+        ],
+        [
+          "p004",
+          3
+        ]
+      ],
+      "total": 603804,
+      "ts": "2025-08-15T20:26:24",
+      "status": "paid"
+    },
+    {
+      "id": "o003",
+      "user_id": "u020",
+      "items": [
+        [
+          "p083",
+          1
+        ],
+        [
+          "p082",
+          2
+        ]
+      ],
+      "total": 447126,
+      "ts": "2025-08-21T11:00:08",
+      "status": "paid"
+    },
+    {
+      "id": "o004",
+      "user_id": "u004",
+      "items": [
+        [
+          "p006",
+          1
+        ],
+        [
+          "p039",
+          2
+        ]
+      ],
+      "total": 98502,
+      "ts": "2025-01-30T03:32:19",
+      "status": "paid"
+    },
+    {
+      "id": "o005",
+      "user_id": "u018",
+      "items": [
+        [
+          "p050",
+          2
+        ],
+        [
+          "p048",
+          3
+        ]
+      ],
+      "total": 533785,
+      "ts": "2025-07-10T19:40:04",
+      "status": "paid"
+    },
+    {
+      "id": "o006",
+      "user_id": "u024",
+      "items": [
+        [
+          "p114",
+          2
+        ],
+        [
+          "p084",
+          1
+        ]
+      ],
+      "total": 342841,
+      "ts": "2025-08-02T17:48:59",
+      "status": "paid"
+    },
+    {
+      "id": "o007",
+      "user_id": "u009",
+      "items": [
+        [
+          "p089",
+          2
+        ]
+      ],
+      "total": 325622,
+      "ts": "2025-02-25T16:08:35",
+      "status": "paid"
+    },
+    {
+      "id": "o008",
+      "user_id": "u008",
+      "items": [
+        [
+          "p013",
+          3
+        ],
+        [
+          "p048",
+          3
+        ],
+        [
+          "p116",
+          3
+        ]
+      ],
+      "total": 1180644,
+      "ts": "2025-04-02T02:12:16",
+      "status": "paid"
+    },
+    {
+      "id": "o009",
+      "user_id": "u007",
+      "items": [
+        [
+          "p109",
+          2
+        ]
+      ],
+      "total": 349292,
+      "ts": "2025-01-24T07:43:21",
+      "status": "paid"
+    },
+    {
+      "id": "o010",
+      "user_id": "u020",
+      "items": [
+        [
+          "p007",
+          2
+        ]
+      ],
+      "total": 357364,
+      "ts": "2025-03-04T04:35:05",
+      "status": "paid"
+    },
+    {
+      "id": "o011",
+      "user_id": "u007",
+      "items": [
+        [
+          "p107",
+          3
+        ]
+      ],
+      "total": 594657,
+      "ts": "2025-02-23T21:20:58",
+      "status": "paid"
+    },
+    {
+      "id": "o012",
+      "user_id": "u028",
+      "items": [
+        [
+          "p043",
+          1
+        ],
+        [
+          "p101",
+          3
+        ]
+      ],
+      "total": 700553,
+      "ts": "2025-01-01T10:05:42",
+      "status": "refunded"
+    },
+    {
+      "id": "o013",
+      "user_id": "u005",
+      "items": [
+        [
+          "p070",
+          2
+        ],
+        [
+          "p103",
+          1
+        ]
+      ],
+      "total": 512110,
+      "ts": "2025-01-29T00:56:19",
+      "status": "paid"
+    },
+    {
+      "id": "o014",
+      "user_id": "u012",
+      "items": [
+        [
+          "p076",
+          2
+        ],
+        [
+          "p003",
+          1
+        ]
+      ],
+      "total": 428363,
+      "ts": "2025-03-09T01:54:28",
+      "status": "paid"
+    },
+    {
+      "id": "o015",
+      "user_id": "u014",
+      "items": [
+        [
+          "p096",
+          1
+        ]
+      ],
+      "total": 118927,
+      "ts": "2025-05-02T16:19:16",
+      "status": "paid"
+    },
+    {
+      "id": "o016",
+      "user_id": "u017",
+      "items": [
+        [
+          "p058",
+          3
+        ]
+      ],
+      "total": 258531,
+      "ts": "2025-02-26T22:23:43",
+      "status": "paid"
+    },
+    {
+      "id": "o017",
+      "user_id": "u026",
+      "items": [
+        [
+          "p059",
+          3
+        ],
+        [
+          "p004",
+          1
+        ],
+        [
+          "p062",
+          2
+        ]
+      ],
+      "total": 612764,
+      "ts": "2025-04-20T03:55:50",
+      "status": "paid"
+    },
+    {
+      "id": "o018",
+      "user_id": "u030",
+      "items": [
+        [
+          "p010",
+          1
+        ],
+        [
+          "p042",
+          3
+        ],
+        [
+          "p019",
+          1
+        ],
+        [
+          "p017",
+          2
+        ]
+      ],
+      "total": 856721,
+      "ts": "2025-06-09T23:02:58",
+      "status": "paid"
+    },
+    {
+      "id": "o019",
+      "user_id": "u023",
+      "items": [
+        [
+          "p049",
+          3
+        ],
+        [
+          "p068",
+          2
+        ],
+        [
+          "p059",
+          3
+        ]
+      ],
+      "total": 1143633,
+      "ts": "2025-06-04T15:39:47",
+      "status": "paid"
+    },
+    {
+      "id": "o020",
+      "user_id": "u023",
+      "items": [
+        [
+          "p110",
+          3
+        ]
+      ],
+      "total": 539334,
+      "ts": "2025-06-16T20:04:24",
+      "status": "paid"
+    },
+    {
+      "id": "o021",
+      "user_id": "u007",
+      "items": [
+        [
+          "p058",
+          1
+        ],
+        [
+          "p053",
+          2
+        ],
+        [
+          "p106",
+          2
+        ],
+        [
+          "p052",
+          2
+        ]
+      ],
+      "total": 697341,
+      "ts": "2025-07-06T03:27:43",
+      "status": "paid"
+    },
+    {
+      "id": "o022",
+      "user_id": "u011",
+      "items": [
+        [
+          "p048",
+          1
+        ],
+        [
+          "p088",
+          2
+        ],
+        [
+          "p009",
+          1
+        ]
+      ],
+      "total": 519821,
+      "ts": "2025-08-01T03:06:28",
+      "status": "paid"
+    },
+    {
+      "id": "o023",
+      "user_id": "u004",
+      "items": [
+        [
+          "p104",
+          1
+        ],
+        [
+          "p072",
+          1
+        ],
+        [
+          "p076",
+          3
+        ]
+      ],
+      "total": 584683,
+      "ts": "2025-05-24T12:00:07",
+      "status": "paid"
+    },
+    {
+      "id": "o024",
+      "user_id": "u014",
+      "items": [
+        [
+          "p112",
+          3
+        ],
+        [
+          "p097",
+          2
+        ],
+        [
+          "p112",
+          3
+        ]
+      ],
+      "total": 356830,
+      "ts": "2025-01-14T10:28:20",
+      "status": "paid"
+    },
+    {
+      "id": "o025",
+      "user_id": "u012",
+      "items": [
+        [
+          "p074",
+          3
+        ]
+      ],
+      "total": 129315,
+      "ts": "2025-02-24T05:38:00",
+      "status": "paid"
+    },
+    {
+      "id": "o026",
+      "user_id": "u008",
+      "items": [
+        [
+          "p045",
+          3
+        ]
+      ],
+      "total": 528069,
+      "ts": "2025-04-05T04:10:58",
+      "status": "paid"
+    },
+    {
+      "id": "o027",
+      "user_id": "u019",
+      "items": [
+        [
+          "p104",
+          2
+        ],
+        [
+          "p109",
+          3
+        ]
+      ],
+      "total": 601506,
+      "ts": "2025-07-16T22:38:10",
+      "status": "paid"
+    },
+    {
+      "id": "o028",
+      "user_id": "u021",
+      "items": [
+        [
+          "p078",
+          3
+        ]
+      ],
+      "total": 415290,
+      "ts": "2025-08-01T09:44:14",
+      "status": "paid"
+    },
+    {
+      "id": "o029",
+      "user_id": "u009",
+      "items": [
+        [
+          "p118",
+          2
+        ],
+        [
+          "p045",
+          1
+        ],
+        [
+          "p024",
+          1
+        ]
+      ],
+      "total": 558779,
+      "ts": "2025-05-25T23:55:59",
+      "status": "paid"
+    },
+    {
+      "id": "o030",
+      "user_id": "u005",
+      "items": [
+        [
+          "p012",
+          3
+        ]
+      ],
+      "total": 95229,
+      "ts": "2025-05-16T07:49:57",
+      "status": "paid"
+    },
+    {
+      "id": "o031",
+      "user_id": "u015",
+      "items": [
+        [
+          "p021",
+          2
+        ],
+        [
+          "p040",
+          3
+        ],
+        [
+          "p042",
+          3
+        ]
+      ],
+      "total": 1092764,
+      "ts": "2025-06-02T03:05:35",
+      "status": "refunded"
+    },
+    {
+      "id": "o032",
+      "user_id": "u005",
+      "items": [
+        [
+          "p097",
+          3
+        ],
+        [
+          "p007",
+          3
+        ]
+      ],
+      "total": 807168,
+      "ts": "2025-01-21T09:54:25",
+      "status": "paid"
+    },
+    {
+      "id": "o033",
+      "user_id": "u014",
+      "items": [
+        [
+          "p078",
+          2
+        ],
+        [
+          "p054",
+          2
+        ],
+        [
+          "p028",
+          3
+        ],
+        [
+          "p015",
+          2
+        ]
+      ],
+      "total": 916308,
+      "ts": "2025-04-21T04:02:14",
+      "status": "paid"
+    },
+    {
+      "id": "o034",
+      "user_id": "u022",
+      "items": [
+        [
+          "p068",
+          3
+        ],
+        [
+          "p040",
+          1
+        ],
+        [
+          "p029",
+          2
+        ],
+        [
+          "p077",
+          1
+        ]
+      ],
+      "total": 1097667,
+      "ts": "2025-01-02T07:26:34",
+      "status": "paid"
+    },
+    {
+      "id": "o035",
+      "user_id": "u007",
+      "items": [
+        [
+          "p098",
+          2
+        ],
+        [
+          "p038",
+          2
+        ]
+      ],
+      "total": 565386,
+      "ts": "2025-01-31T00:16:53",
+      "status": "paid"
+    },
+    {
+      "id": "o036",
+      "user_id": "u014",
+      "items": [
+        [
+          "p017",
+          2
+        ],
+        [
+          "p069",
+          3
+        ]
+      ],
+      "total": 266182,
+      "ts": "2025-02-28T18:12:50",
+      "status": "paid"
+    },
+    {
+      "id": "o037",
+      "user_id": "u022",
+      "items": [
+        [
+          "p010",
+          2
+        ],
+        [
+          "p111",
+          3
+        ],
+        [
+          "p006",
+          2
+        ]
+      ],
+      "total": 378380,
+      "ts": "2025-01-05T16:44:20",
+      "status": "cancelled"
+    },
+    {
+      "id": "o038",
+      "user_id": "u028",
+      "items": [
+        [
+          "p074",
+          2
+        ],
+        [
+          "p074",
+          2
+        ],
+        [
+          "p091",
+          3
+        ]
+      ],
+      "total": 403756,
+      "ts": "2025-04-17T10:32:27",
+      "status": "paid"
+    },
+    {
+      "id": "o039",
+      "user_id": "u001",
+      "items": [
+        [
+          "p022",
+          3
+        ],
+        [
+          "p059",
+          3
+        ],
+        [
+          "p118",
+          2
+        ]
+      ],
+      "total": 1104096,
+      "ts": "2025-01-23T15:54:00",
+      "status": "paid"
+    },
+    {
+      "id": "o040",
+      "user_id": "u008",
+      "items": [
+        [
+          "p076",
+          2
+        ],
+        [
+          "p068",
+          1
+        ],
+        [
+          "p051",
+          2
+        ],
+        [
+          "p096",
+          2
+        ]
+      ],
+      "total": 760635,
+      "ts": "2025-02-26T12:07:35",
+      "status": "paid"
+    },
+    {
+      "id": "o041",
+      "user_id": "u003",
+      "items": [
+        [
+          "p068",
+          3
+        ]
+      ],
+      "total": 521559,
+      "ts": "2025-02-19T12:43:13",
+      "status": "paid"
+    },
+    {
+      "id": "o042",
+      "user_id": "u027",
+      "items": [
+        [
+          "p031",
+          1
+        ],
+        [
+          "p019",
+          2
+        ]
+      ],
+      "total": 276026,
+      "ts": "2025-02-20T06:19:00",
+      "status": "paid"
+    },
+    {
+      "id": "o043",
+      "user_id": "u025",
+      "items": [
+        [
+          "p023",
+          3
+        ]
+      ],
+      "total": 380961,
+      "ts": "2025-05-07T16:53:31",
+      "status": "paid"
+    },
+    {
+      "id": "o044",
+      "user_id": "u025",
+      "items": [
+        [
+          "p088",
+          3
+        ],
+        [
+          "p083",
+          3
+        ],
+        [
+          "p080",
+          2
+        ],
+        [
+          "p111",
+          3
+        ]
+      ],
+      "total": 843905,
+      "ts": "2025-03-22T05:29:46",
+      "status": "paid"
+    },
+    {
+      "id": "o045",
+      "user_id": "u016",
+      "items": [
+        [
+          "p081",
+          2
+        ],
+        [
+          "p102",
+          2
+        ],
+        [
+          "p076",
+          1
+        ],
+        [
+          "p046",
+          3
+        ]
+      ],
+      "total": 636848,
+      "ts": "2025-01-19T11:18:05",
+      "status": "paid"
+    },
+    {
+      "id": "o046",
+      "user_id": "u002",
+      "items": [
+        [
+          "p048",
+          2
+        ]
+      ],
+      "total": 308298,
+      "ts": "2025-01-20T23:28:17",
+      "status": "refunded"
+    },
+    {
+      "id": "o047",
+      "user_id": "u028",
+      "items": [
+        [
+          "p079",
+          3
+        ]
+      ],
+      "total": 568815,
+      "ts": "2025-05-10T13:59:54",
+      "status": "paid"
+    },
+    {
+      "id": "o048",
+      "user_id": "u018",
+      "items": [
+        [
+          "p058",
+          3
+        ]
+      ],
+      "total": 258531,
+      "ts": "2025-06-16T06:51:12",
+      "status": "paid"
+    },
+    {
+      "id": "o049",
+      "user_id": "u016",
+      "items": [
+        [
+          "p008",
+          2
+        ],
+        [
+          "p014",
+          2
+        ]
+      ],
+      "total": 525892,
+      "ts": "2025-07-02T03:04:13",
+      "status": "paid"
+    },
+    {
+      "id": "o050",
+      "user_id": "u006",
+      "items": [
+        [
+          "p032",
+          3
+        ]
+      ],
+      "total": 73473,
+      "ts": "2025-04-23T15:59:55",
+      "status": "paid"
+    },
+    {
+      "id": "o051",
+      "user_id": "u020",
+      "items": [
+        [
+          "p047",
+          2
+        ],
+        [
+          "p118",
+          2
+        ]
+      ],
+      "total": 391612,
+      "ts": "2025-04-10T14:52:58",
+      "status": "paid"
+    },
+    {
+      "id": "o052",
+      "user_id": "u022",
+      "items": [
+        [
+          "p102",
+          3
+        ]
+      ],
+      "total": 98229,
+      "ts": "2025-06-15T12:11:03",
+      "status": "paid"
+    },
+    {
+      "id": "o053",
+      "user_id": "u004",
+      "items": [
+        [
+          "p037",
+          2
+        ],
+        [
+          "p093",
+          3
+        ],
+        [
+          "p117",
+          3
+        ],
+        [
+          "p112",
+          1
+        ]
+      ],
+      "total": 923658,
+      "ts": "2025-03-27T02:58:02",
+      "status": "paid"
+    },
+    {
+      "id": "o054",
+      "user_id": "u005",
+      "items": [
+        [
+          "p040",
+          3
+        ],
+        [
+          "p090",
+          3
+        ],
+        [
+          "p051",
+          1
+        ]
+      ],
+      "total": 673758,
+      "ts": "2025-06-02T03:05:04",
+      "status": "paid"
+    },
+    {
+      "id": "o055",
+      "user_id": "u013",
+      "items": [
+        [
+          "p105",
+          1
+        ],
+        [
+          "p086",
+          3
+        ],
+        [
+          "p107",
+          3
+        ]
+      ],
+      "total": 736308,
+      "ts": "2025-06-25T19:09:55",
+      "status": "paid"
+    },
+    {
+      "id": "o056",
+      "user_id": "u022",
+      "items": [
+        [
+          "p066",
+          2
+        ],
+        [
+          "p003",
+          2
+        ],
+        [
+          "p040",
+          1
+        ],
+        [
+          "p028",
+          2
+        ]
+      ],
+      "total": 883834,
+      "ts": "2025-07-16T17:42:16",
+      "status": "paid"
+    },
+    {
+      "id": "o057",
+      "user_id": "u005",
+      "items": [
+        [
+          "p010",
+          2
+        ],
+        [
+          "p109",
+          1
+        ]
+      ],
+      "total": 442386,
+      "ts": "2025-05-10T19:39:08",
+      "status": "paid"
+    },
+    {
+      "id": "o058",
+      "user_id": "u029",
+      "items": [
+        [
+          "p085",
+          2
+        ]
+      ],
+      "total": 155074,
+      "ts": "2025-08-13T22:30:06",
+      "status": "paid"
+    },
+    {
+      "id": "o059",
+      "user_id": "u013",
+      "items": [
+        [
+          "p021",
+          1
+        ],
+        [
+          "p107",
+          3
+        ]
+      ],
+      "total": 616267,
+      "ts": "2025-07-17T22:44:45",
+      "status": "paid"
+    },
+    {
+      "id": "o060",
+      "user_id": "u006",
+      "items": [
+        [
+          "p006",
+          2
+        ],
+        [
+          "p047",
+          3
+        ],
+        [
+          "p093",
+          1
+        ],
+        [
+          "p057",
+          3
+        ]
+      ],
+      "total": 181903,
+      "ts": "2025-03-14T16:20:41",
+      "status": "paid"
+    }
+  ]
+}
