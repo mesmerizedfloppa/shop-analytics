@@ -22,7 +22,7 @@ class Product:
 class User:
     id: str
     name: str
-    tier: str  # "regular" | "vip"
+    tier: str  # "regular" or "vip"
 
 
 @dataclass(frozen=True)

@@ -1,32 +1,235 @@
 import sys
 import os
 import streamlit as st
+from functools import reduce
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from core.transforms import load_seed, total_sales  # noqa: E402
+from core.domain import Cart
+from core.transforms import (
+    load_seed,
+    add_to_cart,
+    remove_from_cart,
+    checkout,
+    total_sales,
+    by_category,
+    by_price_range,
+    by_tag,
+)
 
 
+# Кэширование загрузки данных
 @st.cache_data
 def get_data():
     return load_seed("data/seed.json")
 
 
-def main():
-    st.set_page_config(page_title="Shop Analytics", layout="centered")
-    st.title("📊 Shop Analytics — Overview")
-
+# Инициализация состояния
+if "cart" not in st.session_state:
+    categories, products, users, orders = get_data()
+    st.session_state.cart = Cart(id="cart_default", user_id=users[0].id, items=())
+else:
     categories, products, users, orders = get_data()
 
-    st.subheader("Overview")
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("# Users", f"{len(users):,}")
-    col2.metric("# Products", f"{len(products):,}")
-    col3.metric("# Orders", f"{len(orders):,}")
-    sales_value = total_sales(orders) // 100
-    formatted_sales = f"{sales_value:,}".replace(",", " ")
-    col4.metric("Total Sales", f"{formatted_sales} kzt")
+
+# Настройки интерфейса
+st.set_page_config(page_title="FP Shop Analytics", layout="wide")
+st.title("🛍️ Функциональный интернет-магазин")
+st.caption("Проект: Алмаз, Нурдаулет, Бакашар — лабораторные 1–2")
 
 
-if __name__ == "__main__":
-    main()
+# Вкладки
+tab_overview, tab_catalog, tab_cart, tab_stats = st.tabs(
+    ["Overview", "Каталог", "Корзина", "Статистика"]
+)
+
+
+# OVERVIEW
+with tab_overview:
+    st.header("📦 Общая информация")
+    st.metric("Категорий", len(categories))
+    st.metric("Товаров", len(products))
+    st.metric("Пользователей", len(users))
+    st.metric("Заказов", len(orders))
+
+    total = total_sales(tuple(o for o in orders if o.status == "paid"))
+    st.metric("💰 Общая сумма продаж", f"{total / 100:.2f} ₸")
+
+
+# КАТАЛОГ
+with tab_catalog:
+    st.header("🛒 Каталог товаров")
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        selected_category = st.selectbox(
+            "Категория", ["Все"] + [c.name for c in categories], index=0
+        )
+    with col2:
+        # Фильтр по диапазону цен от 0 до 2000
+        min_price, max_price = st.slider(
+            "Диапазон цены (₸)", 0, 2000, (0, 2000), step=10
+        )
+    with col3:
+        all_tags = sorted({t for p in products for t in p.tags})
+        selected_tag = st.selectbox("Тег", ["Все"] + all_tags, index=0)
+
+    # Преобразование фильтров в копейки
+    min_price_kop, max_price_kop = min_price * 100, max_price * 100
+
+    # Замыкания-фильтры
+    category_filter = (
+        by_category(
+            next((c.id for c in categories if c.name == selected_category), None)
+        )
+        if selected_category != "Все"
+        else lambda _: True
+    )
+    price_filter = by_price_range(min_price_kop, max_price_kop)
+    tag_filter = by_tag(selected_tag) if selected_tag != "Все" else lambda _: True
+
+    # Применяем рекурсию и фильтры
+    filtered_products = tuple(
+        filter(
+            lambda p: category_filter(p) and price_filter(p) and tag_filter(p),
+            products,
+        )
+    )
+
+    st.markdown(f"### Найдено товаров: {len(filtered_products)}")
+    st.divider()
+
+    # --- Вывод карточек ---
+    for p in filtered_products:
+        with st.container():
+            cols = st.columns([4, 2, 2, 2])
+            with cols[0]:
+                st.markdown(f"**{p.title}**")
+                st.caption(f"Теги: {', '.join(p.tags)}")
+            with cols[1]:
+                st.write(f"{p.price / 100:.2f} ₸")
+            with cols[2]:
+                qty = st.number_input(
+                    "Кол-во",
+                    min_value=1,
+                    value=1,
+                    key=f"qty_{p.id}",
+                    label_visibility="collapsed",
+                )
+            with cols[3]:
+                if st.button("🛒 Добавить", key=f"add_{p.id}"):
+                    st.session_state.cart = add_to_cart(
+                        st.session_state.cart, p.id, qty
+                    )
+                    st.success(f"Добавлено: {p.title} × {qty}", icon="✅")
+            st.markdown("---")
+
+    # Базовые фильтры
+    category_filter = (
+        by_category(
+            next((c.id for c in categories if c.name == selected_category), None)
+        )
+        if selected_category != "Все"
+        else lambda _: True
+    )
+    price_filter = by_price_range(min_price, max_price)
+    tag_filter = by_tag(selected_tag) if selected_tag != "Все" else lambda _: True
+
+    # Применяем рекурсию и фильтры
+    filtered_products = tuple(
+        filter(
+            lambda p: category_filter(p) and price_filter(p) and tag_filter(p),
+            products,
+        )
+    )
+
+    st.markdown(f"### Найдено товаров: {len(filtered_products)}")
+    st.divider()
+
+    # Вывод карточек
+    for p in filtered_products:
+        with st.container():
+            cols = st.columns([4, 2, 2, 2])
+            with cols[0]:
+                st.markdown(f"**{p.title}**")
+                st.caption(f"Теги: {', '.join(p.tags)}")
+            with cols[1]:
+                st.write(f"{p.price / 100:.2f} ₸")
+            with cols[2]:
+                qty = st.number_input(
+                    "Кол-во",
+                    min_value=1,
+                    value=1,
+                    key=f"qty_{p.id}",
+                    label_visibility="collapsed",
+                )
+            with cols[3]:
+                if st.button("🛒 Добавить", key=f"add_{p.id}"):
+                    st.session_state.cart = add_to_cart(
+                        st.session_state.cart, p.id, qty
+                    )
+                    st.success(f"Добавлено: {p.title} × {qty}", icon="✅")
+            st.markdown("---")
+
+
+# КОРЗИНА
+with tab_cart:
+    st.header("🧺 Ваша корзина")
+
+    cart = st.session_state.cart
+
+    if not cart.items:
+        st.info("Корзина пуста. Перейдите в каталог, чтобы добавить товары.")
+    else:
+        total_sum = reduce(
+            lambda acc, item: acc
+            + next(p.price for p in products if p.id == item[0]) * item[1],
+            cart.items,
+            0,
+        )
+
+        st.markdown("### Содержимое корзины:")
+        for pid, qty in cart.items:
+            product = next((p for p in products if p.id == pid), None)
+            if product:
+                cols = st.columns([5, 2, 1])
+                with cols[0]:
+                    st.write(f"{product.title}")
+                with cols[1]:
+                    st.write(f"× {qty} = {(product.price * qty) / 100:.2f} ₸")
+                with cols[2]:
+                    if st.button("✖", key=f"remove_{pid}"):
+                        st.session_state.cart = remove_from_cart(cart, pid)
+                        st.warning(f"Товар {product.title} удалён", icon="⚠️")
+
+        st.divider()
+        st.markdown(f"### 💰 Итого: {total_sum / 100:.2f} ₸")
+
+        # Кнопка оформления заказа
+        if st.button("✅ Оформить заказ"):
+            new_order = checkout(cart, ts="2025-10-14T12:00:00", products=products)
+            st.success(f"Заказ оформлен на сумму {new_order.total / 100:.2f} ₸!")
+
+            # Очистка корзины после оформления
+            st.session_state.cart = Cart(
+                id="cart_default",
+                user_id=users[0].id,
+                items=(),
+            )
+
+# СТАТИСТИКА
+with tab_stats:
+    st.header("📊 Статистика пользователей и продаж")
+
+    vip_users = [u for u in users if u.tier == "VIP"]
+    regular_users = [u for u in users if u.tier == "regular"]
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("👑 VIP-пользователей", len(vip_users))
+    with col2:
+        st.metric("👤 Обычных пользователей", len(regular_users))
+
+    st.markdown("---")
+    st.metric("Всего заказов", len(orders))
+    st.metric("Оплаченных заказов", len([o for o in orders if o.status == "paid"]))
