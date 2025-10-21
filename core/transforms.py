@@ -138,13 +138,12 @@ def by_user_tier(tier: str) -> Callable[[User], bool]:
     return lambda u: (u.tier or "").lower() == (tier or "").lower()
 
 
-## дорогая функция поиска бесстселеров 
+## дорогая функция поиска бесстселеров
+
 
 @lru_cache
 def top_products(
-    orders: Tuple[Order, ...],
-    products: Tuple[Product, ...],
-    k: int = 10
+    orders: Tuple[Order, ...], products: Tuple[Product, ...], k: int = 10
 ) -> Tuple[Product, ...]:
     product_sales = {}
 

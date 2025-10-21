@@ -8,27 +8,57 @@ from core.transforms import top_products
 from core.domain import Product, Order
 
 
-# фикстуры 
+# фикстуры
 @pytest.fixture
 def sample_products():
     return (
-        Product(id="p1", title="Phone", price=100_000, category_id="c1", tags=("tech",)),
-        Product(id="p2", title="Laptop", price=300_000, category_id="c1", tags=("tech",)),
-        Product(id="p3", title="Tablet", price=200_000, category_id="c2", tags=("mobile",)),
-        Product(id="p4", title="Headphones", price=50_000, category_id="c3", tags=("audio",)),
+        Product(
+            id="p1", title="Phone", price=100_000, category_id="c1", tags=("tech",)
+        ),
+        Product(
+            id="p2", title="Laptop", price=300_000, category_id="c1", tags=("tech",)
+        ),
+        Product(
+            id="p3", title="Tablet", price=200_000, category_id="c2", tags=("mobile",)
+        ),
+        Product(
+            id="p4", title="Headphones", price=50_000, category_id="c3", tags=("audio",)
+        ),
     )
 
 
 @pytest.fixture
 def sample_orders():
     return (
-        Order(id="o1", user_id="u1", items=(("p1", 2), ("p2", 1)), total=500_000, ts="2025-10-01", status="paid"),
-        Order(id="o2", user_id="u2", items=(("p3", 5), ("p1", 1)), total=1_200_000, ts="2025-10-02", status="paid"),
-        Order(id="o3", user_id="u3", items=(("p4", 3),), total=150_000, ts="2025-10-03", status="refunded"),
+        Order(
+            id="o1",
+            user_id="u1",
+            items=(("p1", 2), ("p2", 1)),
+            total=500_000,
+            ts="2025-10-01",
+            status="paid",
+        ),
+        Order(
+            id="o2",
+            user_id="u2",
+            items=(("p3", 5), ("p1", 1)),
+            total=1_200_000,
+            ts="2025-10-02",
+            status="paid",
+        ),
+        Order(
+            id="o3",
+            user_id="u3",
+            items=(("p4", 3),),
+            total=150_000,
+            ts="2025-10-03",
+            status="refunded",
+        ),
     )
 
 
-# тесты 
+# тесты
+
 
 def test_top_products_returns_top_k(sample_orders, sample_products):
     top = top_products(sample_orders, sample_products, k=2)
@@ -37,7 +67,6 @@ def test_top_products_returns_top_k(sample_orders, sample_products):
     top_ids = [p.id for p in top]
     assert "p3" in top_ids  # p3 точно в топе
     assert "p1" in top_ids
-
 
 
 def test_top_products_ignores_non_paid_orders(sample_orders, sample_products):

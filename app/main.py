@@ -101,7 +101,7 @@ with tab_catalog:
     st.markdown(f"### Найдено товаров: {len(filtered_products)}")
     st.divider()
 
-    # Вывод карточек 
+    # Вывод карточек
     for p in filtered_products:
         with st.container():
             cols = st.columns([4, 2, 2, 2])
@@ -236,11 +236,11 @@ with tab_stats:
     st.metric("Всего заказов", len(orders))
     st.metric("Оплаченных заказов", len([o for o in orders if o.status == "paid"]))
 
-tab_overview, tab_catalog, tab_cart, tab_stats, tab_reports = st.tabs([
-    "Overview", "Каталог", "Корзина", "Статистика", "Reports"
-])
+tab_overview, tab_catalog, tab_cart, tab_stats, tab_reports = st.tabs(
+    ["Overview", "Каталог", "Корзина", "Статистика", "Reports"]
+)
 
-# REPORTS 
+# REPORTS
 with tab_reports:
     st.header("📈 Отчёты — Top Products (cached)")
 
