@@ -2,7 +2,7 @@ import json
 import uuid
 from functools import reduce, lru_cache
 from typing import Tuple, Callable
-
+from .ftypes import Maybe, Either
 from .domain import Cart, Order, Product, User, Category
 
 
@@ -155,3 +155,71 @@ def top_products(
 
     ranked_ids = sorted(product_sales, key=product_sales.get, reverse=True)[:k]
     return tuple(p for p in products if p.id in ranked_ids)
+
+
+## безопасные функции для лаб4
+
+
+def safe_product(products, pid: str):
+    """
+    Безопасный поиск продукта по id, возвращает Maybe-обёртку.
+    Работает с разными реализациями Maybe (старой или новой).
+    """
+    found = next((p for p in products if p.id == pid), None)
+
+    # Prefer factory API if available
+    if hasattr(Maybe, "some") and hasattr(Maybe, "nothing"):
+        return Maybe.some(found) if found is not None else Maybe.nothing()
+
+    # Fallback: try constructor-like usage
+    try:
+        return Maybe(found)
+    except Exception:
+        # Ultimate safe fallback: create a minimal compatible object
+        class _SimpleMaybe:
+            def __init__(self, val):
+                self.value = val
+
+            def is_some(self):
+                return self.value is not None
+
+            def get_or_else(self, d):
+                return self.value if self.is_some() else d
+
+        return _SimpleMaybe(found)
+
+
+def validate_order(order: Order, stock: dict, discounts: tuple = ()) -> Either:
+    """
+    Проверяет заказ на корректность:
+    - товары есть в stock
+    - количество в наличии
+    Возвращает Either[Order, dict(error=...)]
+    """
+
+    def validate_item(item):
+        pid, qty = item
+        if pid not in stock:
+            return Either.left({"error": f"Товар {pid} отсутствует в базе"})
+        if stock[pid] < qty:
+            return Either.left({"error": f"Недостаточно товара {pid} на складе"})
+        return Either.right(item)
+
+    # Проверка всех товаров
+    results = [validate_item(i) for i in order.items]
+    errors = [r.get_or_else(None) for r in results if r.is_left]
+
+    if errors:
+        return Either.left(errors[0])
+
+    # Применение скидок (демо — без вычислений)
+    total = sum(qty * 1000 for _, qty in order.items)
+    validated = Order(
+        id=order.id,
+        user_id=order.user_id,
+        items=order.items,
+        total=total,
+        ts=order.ts,
+        status="validated",
+    )
+    return Either.right(validated)

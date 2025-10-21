@@ -6,7 +6,7 @@ import time
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from core.domain import Cart
+from core.domain import Cart, Order
 from core.transforms import (
     load_seed,
     add_to_cart,
@@ -17,6 +17,8 @@ from core.transforms import (
     by_price_range,
     by_tag,
     top_products,
+    safe_product,
+    validate_order,
 )
 
 
@@ -41,10 +43,9 @@ st.caption("Проект: Алмаз, Нурдаулет, Бакашар — л�
 
 
 # Вкладки
-tab_overview, tab_catalog, tab_cart, tab_stats = st.tabs(
-    ["Overview", "Каталог", "Корзина", "Статистика"]
+tab_overview, tab_catalog, tab_cart, tab_stats, tab_reports = st.tabs(
+    ["Overview", "Каталог", "Корзина", "Статистика", "Reports"]
 )
-
 
 # OVERVIEW
 with tab_overview:
@@ -236,11 +237,7 @@ with tab_stats:
     st.metric("Всего заказов", len(orders))
     st.metric("Оплаченных заказов", len([o for o in orders if o.status == "paid"]))
 
-tab_overview, tab_catalog, tab_cart, tab_stats, tab_reports = st.tabs(
-    ["Overview", "Каталог", "Корзина", "Статистика", "Reports"]
-)
-
-# REPORTS
+# Reports
 with tab_reports:
     st.header("📈 Отчёты — Top Products (cached)")
 
@@ -260,3 +257,44 @@ with tab_reports:
     st.markdown("### 🔝 Топовые товары по продажам:")
     for idx, p in enumerate(top_cached, start=1):
         st.write(f"{idx}. {p.title} — {p.price / 100:.2f} ₸")
+
+## Tab Reports
+
+tab_reports = st.tabs(["📈 Reports · Safe Operations"])[0]
+
+with tab_reports:
+    st.header("🧩 Safe Operations Maybe/Either")
+
+    st.markdown("### 🔍 Безопасный поиск товара")
+    pid_input = st.text_input("Введите ID товара для поиска:", "p1")
+    if st.button("Найти товар", key="find_product"):
+        product_result = safe_product(products, pid_input)
+        if product_result.is_none():
+            st.warning(f"❌ Товар с ID `{pid_input}` не найден.")
+        else:
+            product = product_result.get_or_else(None)
+            st.success(
+                f"✅ Найден товар: **{product.title}**, {product.price / 100:.2f} ₸"
+            )
+
+    st.divider()
+
+    st.markdown("### ✅ Проверка заказа (Either)")
+    fake_order = Order(
+        id="order_ui",
+        user_id=users[0].id,
+        items=(("p1", 2), ("p2", 1)),
+        total=0,
+        ts="2025-10-21",
+        status="pending",
+    )
+
+    stock = {"p1": 3, "p2": 0, "p3": 10}
+
+    if st.button("Проверить заказ", key="check_order"):
+        order_result = validate_order(fake_order, stock, ())
+        if order_result.is_left:
+            st.success("✅ Заказ успешно прошёл проверку — все товары в наличии!")
+        else:
+            error = order_result.get_or_else({})
+            st.error(f"❌ Ошибка проверки: {error.get('error')}")
