@@ -1,6 +1,6 @@
 import json
 import uuid
-from functools import reduce
+from functools import reduce, lru_cache
 from typing import Tuple, Callable
 
 from .domain import Cart, Order, Product, User, Category
@@ -136,3 +136,23 @@ def by_tag(tag: str) -> Callable[[Product], bool]:
 def by_user_tier(tier: str) -> Callable[[User], bool]:
     """Возвращает предикат для пользователей по полю tier"""
     return lambda u: (u.tier or "").lower() == (tier or "").lower()
+
+
+## дорогая функция поиска бесстселеров 
+
+@lru_cache
+def top_products(
+    orders: Tuple[Order, ...],
+    products: Tuple[Product, ...],
+    k: int = 10
+) -> Tuple[Product, ...]:
+    product_sales = {}
+
+    for order in orders:
+        if order.status != "paid":
+            continue
+        for pid, qty in order.items:
+            product_sales[pid] = product_sales.get(pid, 0) + qty
+
+    ranked_ids = sorted(product_sales, key=product_sales.get, reverse=True)[:k]
+    return tuple(p for p in products if p.id in ranked_ids)

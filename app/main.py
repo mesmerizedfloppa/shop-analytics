@@ -2,6 +2,7 @@ import sys
 import os
 import streamlit as st
 from functools import reduce
+import time
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -15,6 +16,7 @@ from core.transforms import (
     by_category,
     by_price_range,
     by_tag,
+    top_products,
 )
 
 
@@ -99,7 +101,7 @@ with tab_catalog:
     st.markdown(f"### Найдено товаров: {len(filtered_products)}")
     st.divider()
 
-    # --- Вывод карточек ---
+    # Вывод карточек 
     for p in filtered_products:
         with st.container():
             cols = st.columns([4, 2, 2, 2])
@@ -233,3 +235,28 @@ with tab_stats:
     st.markdown("---")
     st.metric("Всего заказов", len(orders))
     st.metric("Оплаченных заказов", len([o for o in orders if o.status == "paid"]))
+
+tab_overview, tab_catalog, tab_cart, tab_stats, tab_reports = st.tabs([
+    "Overview", "Каталог", "Корзина", "Статистика", "Reports"
+])
+
+# REPORTS 
+with tab_reports:
+    st.header("📈 Отчёты — Top Products (cached)")
+
+    k = st.slider("Количество топ-товаров", 5, 20, 10)
+    start = time.perf_counter()
+    top_uncached = top_products.__wrapped__(orders, products, k)  # вызов без кэша
+    uncached_time = (time.perf_counter() - start) * 1000
+
+    start = time.perf_counter()
+    top_cached = top_products(orders, products, k)  # кэшированный вызов
+    cached_time = (time.perf_counter() - start) * 1000
+
+    st.subheader("⏱ Время выполнения:")
+    st.write(f"Без кэша: {uncached_time:.2f} ms")
+    st.write(f"С кэшем: {cached_time:.2f} ms")
+
+    st.markdown("### 🔝 Топовые товары по продажам:")
+    for idx, p in enumerate(top_cached, start=1):
+        st.write(f"{idx}. {p.title} — {p.price / 100:.2f} ₸")
