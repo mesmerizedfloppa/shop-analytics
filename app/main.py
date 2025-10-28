@@ -38,7 +38,7 @@ else:
 
 # Настройки интерфейса
 st.set_page_config(page_title="FP Shop Analytics", layout="wide")
-st.title("🛍️ Функциональный интернет-магазин")
+st.title("Функциональный интернет-магазин")
 st.caption("Проект: Алмаз, Нурдаулет, Бакашар — лабораторные 1–2")
 
 
@@ -222,7 +222,7 @@ with tab_cart:
 
 # СТАТИСТИКА
 with tab_stats:
-    st.header("📊 Статистика пользователей и продаж")
+    st.header("Статистика пользователей и продаж")
 
     vip_users = [u for u in users if u.tier == "VIP"]
     regular_users = [u for u in users if u.tier == "regular"]
@@ -233,9 +233,48 @@ with tab_stats:
     with col2:
         st.metric("👤 Обычных пользователей", len(regular_users))
 
-    st.markdown("---")
     st.metric("Всего заказов", len(orders))
     st.metric("Оплаченных заказов", len([o for o in orders if o.status == "paid"]))
+    st.markdown("---")
+
+    ## ленивые вычисления
+    st.markdown("## Потоковая обработка заказов")
+
+    from time import perf_counter
+    from core.lazy import iter_orders_by_day, lazy_top_customers
+
+    selected_day = st.text_input(
+        "Введите день (YYYY-MM-DD):", "2025-06-22", key="lazy_day"
+    )
+    if st.button("Показать заказы за день", key="lazy_day_btn"):
+        day_orders = list(iter_orders_by_day(orders, selected_day))
+        st.info(f"Найдено заказов за {selected_day}: {len(day_orders)}")
+        if day_orders:
+            st.table(
+                {
+                    "Order ID": [o.id for o in day_orders],
+                    "User ID": [o.user_id for o in day_orders],
+                    "Total (₸)": [o.total / 100 for o in day_orders],
+                }
+            )
+        else:
+            st.warning("Заказы за указанный день не найдены.")
+
+    st.divider()
+
+    k = st.slider("Показать топ покупателей:", 1, 10, 5, key="lazy_top_slider")
+    if st.button("Показать топ покупателей", key="lazy_top_btn"):
+
+        from core.lazy import lazy_top_customers
+
+        top = list(lazy_top_customers(orders, k))
+        st.subheader("🏆 Топ покупателей")
+        st.table(
+            {
+                "User ID": [u for u, _ in top],
+                "Total (₸)": [t / 100 for _, t in top],
+            }
+        )
 
 # Reports
 with tab_reports:
@@ -259,8 +298,6 @@ with tab_reports:
         st.write(f"{idx}. {p.title} — {p.price / 100:.2f} ₸")
 
 ## Tab Reports
-
-tab_reports = st.tabs(["📈 Reports · Safe Operations"])[0]
 
 with tab_reports:
     st.header("🧩 Safe Operations Maybe/Either")
