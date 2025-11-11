@@ -20,6 +20,7 @@ from core.transforms import (
     safe_product,
     validate_order,
 )
+from core.service import CatalogService, OrderService, AnalyticsService
 
 
 # Кэширование загрузки данных
@@ -240,7 +241,6 @@ with tab_stats:
     ## ленивые вычисления
     st.markdown("## Потоковая обработка заказов")
 
-    from time import perf_counter
     from core.lazy import iter_orders_by_day, lazy_top_customers
 
     selected_day = st.text_input(
@@ -297,7 +297,8 @@ with tab_reports:
     for idx, p in enumerate(top_cached, start=1):
         st.write(f"{idx}. {p.title} — {p.price / 100:.2f} ₸")
 
-## Tab Reports
+    ## Tab Reports
+    st.divider()
 
 with tab_reports:
     st.header("🧩 Safe Operations Maybe/Either")
@@ -313,8 +314,6 @@ with tab_reports:
             st.success(
                 f"✅ Найден товар: **{product.title}**, {product.price / 100:.2f} ₸"
             )
-
-    st.divider()
 
     st.markdown("### ✅ Проверка заказа (Either)")
     fake_order = Order(
@@ -335,3 +334,24 @@ with tab_reports:
         else:
             error = order_result.get_or_else({})
             st.error(f"❌ Ошибка проверки: {error.get('error')}")
+
+    st.divider()
+
+with tab_reports:
+    st.markdown("### 📆 Дневной отчёт")
+
+    day = st.text_input("Введите дату (ГГГГ-ММ-ДД):", "2025-10-21")
+    if st.button("Сформировать дневной отчёт"):
+        catalog = CatalogService(categories, products)
+        orders_svc = OrderService(orders)
+        analytics = AnalyticsService(catalog, orders_svc)
+
+        report = analytics.daily_report(day)
+
+        st.subheader(f"🗓️ Отчёт за {day}")
+        st.write(f"Заказов: {len(report['orders'])}")
+        st.write(f"Суммарные продажи: {report['total_sales'] / 100:.2f} ₸")
+
+        st.markdown("### 👥 Топ клиентов:")
+        for uid, total in report["top_customers"]:
+            st.write(f"• {uid}: {total / 100:.2f} ₸")
