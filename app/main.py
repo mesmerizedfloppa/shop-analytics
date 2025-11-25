@@ -12,7 +12,6 @@ from core.transforms import (
     add_to_cart,
     remove_from_cart,
     checkout,
-    total_sales,
     by_category,
     by_price_range,
     by_tag,
@@ -20,7 +19,6 @@ from core.transforms import (
     safe_product,
     validate_order,
 )
-from core.service import CatalogService, OrderService, AnalyticsService
 from Analytics_Service.report import (
     sales_summary,
     bestsellers_report,
@@ -46,7 +44,10 @@ def get_event_bus():
 
 # ============ Инициализация ============
 st.set_page_config(
-    page_title="FP Shop Analytics", page_icon="🛒", layout="wide", initial_sidebar_state="expanded"
+    page_title="FP Shop Analytics",
+    page_icon="🛒",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
 categories, products, users, orders = get_data()
@@ -72,7 +73,9 @@ def apply_filters(products, category_id=None, min_p=0, max_p=200000, tag=None):
         filters.append(by_tag(tag))
 
     # Композиция всех фильтров
-    combined_filter = lambda p: all(f(p) for f in filters)
+    def combined_filter(p):
+        return all(f(p) for f in filters)
+
     return tuple(filter(combined_filter, products))
 
 

@@ -1,6 +1,5 @@
 from typing import Tuple, Dict, List
 from functools import reduce
-from collections import defaultdict
 from core.domain import Order, Product, User
 
 
@@ -11,10 +10,9 @@ def sales_by_period(
     orders: Tuple[Order, ...], start_date: str, end_date: str
 ) -> Dict[str, int]:
     """
-    Продажи за период по дням
+    Продажи за период по дням (иммутабельная агрегация через reduce)
     Возвращает: {date: total_sales}
     """
-    # Фильтруем заказы за период
     period_orders = tuple(
         filter(
             lambda o: start_date <= o.ts[:10] <= end_date and o.status == "paid",
@@ -22,13 +20,12 @@ def sales_by_period(
         )
     )
 
-    # Группируем по дням
-    sales_by_day = defaultdict(int)
-    for order in period_orders:
+    # Группируем по дням через reduce
+    def accumulate_by_day(acc: dict, order: Order) -> dict:
         day = order.ts[:10]
-        sales_by_day[day] += order.total
+        return {**acc, day: acc.get(day, 0) + order.total}
 
-    return dict(sales_by_day)
+    return reduce(accumulate_by_day, period_orders, {})
 
 
 def average_order_value(orders: Tuple[Order, ...]) -> float:
@@ -43,9 +40,7 @@ def average_order_value(orders: Tuple[Order, ...]) -> float:
 
 
 def sales_summary(orders: Tuple[Order, ...]) -> dict:
-    """
-    Сводка по продажам
-    """
+    """Сводка по продажам"""
     paid = tuple(filter(lambda o: o.status == "paid", orders))
     refunded = tuple(filter(lambda o: o.status == "refunded", orders))
     cancelled = tuple(filter(lambda o: o.status == "cancelled", orders))
@@ -72,14 +67,21 @@ def bestsellers_report(
     orders: Tuple[Order, ...], products: Tuple[Product, ...], k: int = 10
 ) -> List[dict]:
     """
-    Топ-K бестселлеров с деталями
+    Топ-K бестселлеров с деталями (иммутабельная агрегация)
     """
-    # Агрегируем количество проданных товаров
-    product_qty = defaultdict(int)
 
-    for order in filter(lambda o: o.status == "paid", orders):
-        for pid, qty in order.items:
-            product_qty[pid] += qty
+    # Агрегируем количество через reduce
+    def accumulate_product_qty(acc: dict, order: Order) -> dict:
+        if order.status != "paid":
+            return acc
+
+        def add_item(inner_acc: dict, item: Tuple[str, int]) -> dict:
+            pid, qty = item
+            return {**inner_acc, pid: inner_acc.get(pid, 0) + qty}
+
+        return reduce(add_item, order.items, acc)
+
+    product_qty = reduce(accumulate_product_qty, orders, {})
 
     # Сортируем и берём топ-K
     top_ids = sorted(product_qty.keys(), key=product_qty.get, reverse=True)[:k]
@@ -108,15 +110,22 @@ def low_stock_alert(
     products: Tuple[Product, ...], orders: Tuple[Order, ...], threshold: int = 5
 ) -> List[dict]:
     """
-    Товары, которые заканчиваются (проданы > threshold раз за последние заказы)
-    Примерная логика для демонстрации
+    Товары, которые заканчиваются (иммутабельная агрегация)
     """
-    recent_sales = defaultdict(int)
+    recent_orders = orders[-20:] if len(orders) >= 20 else orders
 
-    for order in orders[-20:]:  # Последние 20 заказов
-        if order.status == "paid":
-            for pid, qty in order.items:
-                recent_sales[pid] += qty
+    # Иммутабельная агрегация через reduce
+    def accumulate_sales(acc: dict, order: Order) -> dict:
+        if order.status != "paid":
+            return acc
+
+        def add_item(inner_acc: dict, item: Tuple[str, int]) -> dict:
+            pid, qty = item
+            return {**inner_acc, pid: inner_acc.get(pid, 0) + qty}
+
+        return reduce(add_item, order.items, acc)
+
+    recent_sales = reduce(accumulate_sales, recent_orders, {})
 
     return [
         {"product_id": pid, "recent_sales": qty}
@@ -130,15 +139,16 @@ def low_stock_alert(
 
 def customer_lifetime_value(orders: Tuple[Order, ...]) -> Dict[str, int]:
     """
-    LTV по пользователям
+    LTV по пользователям (иммутабельная агрегация)
     Возвращает: {user_id: total_spent}
     """
-    user_totals = defaultdict(int)
 
-    for order in filter(lambda o: o.status == "paid", orders):
-        user_totals[order.user_id] += order.total
+    def accumulate_user_totals(acc: dict, order: Order) -> dict:
+        if order.status != "paid":
+            return acc
+        return {**acc, order.user_id: acc.get(order.user_id, 0) + order.total}
 
-    return dict(user_totals)
+    return reduce(accumulate_user_totals, orders, {})
 
 
 def top_customers_report(orders: Tuple[Order, ...], k: int = 10) -> List[dict]:
@@ -148,17 +158,22 @@ def top_customers_report(orders: Tuple[Order, ...], k: int = 10) -> List[dict]:
     ltv = customer_lifetime_value(orders)
     top_users = sorted(ltv.items(), key=lambda x: x[1], reverse=True)[:k]
 
-    # Считаем количество заказов
-    order_counts = defaultdict(int)
-    for order in filter(lambda o: o.status == "paid", orders):
-        order_counts[order.user_id] += 1
+    # Считаем количество заказов (иммутабельно)
+    def count_orders(acc: dict, order: Order) -> dict:
+        if order.status != "paid":
+            return acc
+        return {**acc, order.user_id: acc.get(order.user_id, 0) + 1}
+
+    order_counts = reduce(count_orders, orders, {})
 
     return [
         {
             "user_id": uid,
             "total_spent": total,
-            "order_count": order_counts[uid],
-            "avg_order": total // order_counts[uid] if order_counts[uid] > 0 else 0,
+            "order_count": order_counts.get(uid, 0),
+            "avg_order": (
+                total // order_counts[uid] if order_counts.get(uid, 0) > 0 else 0
+            ),
         }
         for uid, total in top_users
     ]
@@ -166,12 +181,15 @@ def top_customers_report(orders: Tuple[Order, ...], k: int = 10) -> List[dict]:
 
 def retention_rate(orders: Tuple[Order, ...]) -> dict:
     """
-    Процент пользователей с повторными покупками
+    Процент пользователей с повторными покупками (иммутабельно)
     """
-    user_orders = defaultdict(int)
 
-    for order in filter(lambda o: o.status == "paid", orders):
-        user_orders[order.user_id] += 1
+    def count_user_orders(acc: dict, order: Order) -> dict:
+        if order.status != "paid":
+            return acc
+        return {**acc, order.user_id: acc.get(order.user_id, 0) + 1}
+
+    user_orders = reduce(count_user_orders, orders, {})
 
     total_users = len(user_orders)
     repeat_users = sum(1 for count in user_orders.values() if count > 1)
@@ -187,16 +205,12 @@ def retention_rate(orders: Tuple[Order, ...]) -> dict:
 # ============ Отчёты по корзинам (конверсия) ============
 
 
-def cart_abandonment_rate(
-    carts: Tuple, orders: Tuple[Order, ...]
-) -> dict:  # Если есть данные о корзинах
+def cart_abandonment_rate(carts: Tuple, orders: Tuple[Order, ...]) -> dict:
     """
     Процент брошенных корзин
-    Примерная функция (требует данных о корзинах)
     """
-    # Заглушка - в реальности нужны данные о всех созданных корзинах
     completed_orders = len(tuple(filter(lambda o: o.status == "paid", orders)))
-    total_carts = len(carts) if carts else completed_orders  # Упрощение
+    total_carts = len(carts) if carts else completed_orders
 
     abandonment = (
         ((total_carts - completed_orders) / total_carts * 100) if total_carts > 0 else 0
@@ -214,39 +228,41 @@ def cart_abandonment_rate(
 
 def sales_by_hour(orders: Tuple[Order, ...]) -> Dict[int, int]:
     """
-    Продажи по часам дня
+    Продажи по часам дня (иммутабельно)
     """
-    hourly_sales = defaultdict(int)
 
-    for order in filter(lambda o: o.status == "paid", orders):
+    def accumulate_hourly(acc: dict, order: Order) -> dict:
+        if order.status != "paid":
+            return acc
         try:
-            # Парсим час из ISO timestamp
             hour = int(order.ts[11:13])
-            hourly_sales[hour] += order.total
+            return {**acc, hour: acc.get(hour, 0) + order.total}
         except (ValueError, IndexError):
-            continue
+            return acc
 
+    hourly_sales = reduce(accumulate_hourly, orders, {})
     return dict(sorted(hourly_sales.items()))
 
 
 def sales_by_weekday(orders: Tuple[Order, ...]) -> Dict[str, int]:
     """
-    Продажи по дням недели
+    Продажи по дням недели (иммутабельно)
     """
     from datetime import datetime
 
-    weekday_sales = defaultdict(int)
     weekday_names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
-    for order in filter(lambda o: o.status == "paid", orders):
+    def accumulate_weekday(acc: dict, order: Order) -> dict:
+        if order.status != "paid":
+            return acc
         try:
             dt = datetime.fromisoformat(order.ts)
             day_name = weekday_names[dt.weekday()]
-            weekday_sales[day_name] += order.total
+            return {**acc, day_name: acc.get(day_name, 0) + order.total}
         except (ValueError, IndexError):
-            continue
+            return acc
 
-    return dict(weekday_sales)
+    return reduce(accumulate_weekday, orders, {})
 
 
 # ============ Композитный отчёт ============

@@ -1,16 +1,13 @@
 import asyncio
 from typing import List, Dict, Tuple
 from functools import reduce
-from collections import defaultdict
 from .domain import Order, Product, User
 
 
 # ============ Асинхронные агрегации ============
 
 
-async def sales_by_day_async(
-    orders: List[Order], days: List[str]
-) -> Dict[str, int]:
+async def sales_by_day_async(orders: List[Order], days: List[str]) -> Dict[str, int]:
     """
     Асинхронно вычисляет продажи по списку дней
     Каждый день обрабатывается параллельно
@@ -18,7 +15,6 @@ async def sales_by_day_async(
 
     async def calculate_day_sales(day: str) -> Tuple[str, int]:
         """Вычисляет продажи за один день"""
-        # Имитация "тяжёлой" операции
         await asyncio.sleep(0.01)
 
         day_orders = [o for o in orders if o.ts.startswith(day) and o.status == "paid"]
@@ -42,9 +38,7 @@ async def sales_by_user_async(
     async def calculate_user_sales(user_id: str) -> Tuple[str, int]:
         await asyncio.sleep(0.01)
 
-        user_orders = [
-            o for o in orders if o.user_id == user_id and o.status == "paid"
-        ]
+        user_orders = [o for o in orders if o.user_id == user_id and o.status == "paid"]
         total = reduce(lambda acc, o: acc + o.total, user_orders, 0)
         return (user_id, total)
 
@@ -59,22 +53,27 @@ async def product_performance_async(
 ) -> List[Dict]:
     """
     Асинхронно анализирует производительность каждого товара
+    ИСПРАВЛЕНО: используем reduce вместо мутабельных переменных
     """
 
     async def analyze_product(product: Product) -> Dict:
         await asyncio.sleep(0.01)
 
-        # Считаем продажи товара
-        qty_sold = 0
-        revenue = 0
-
-        for order in orders:
+        # Функция для агрегации продаж через reduce
+        def accumulate_sales(acc: Tuple[int, int], order: Order) -> Tuple[int, int]:
             if order.status != "paid":
-                continue
-            for pid, qty in order.items:
-                if pid == product.id:
-                    qty_sold += qty
-                    revenue += product.price * qty
+                return acc
+
+            qty_sold, revenue = acc
+
+            # Ищем товар в заказе
+            item = next((item for item in order.items if item[0] == product.id), None)
+            if item:
+                pid, qty = item
+                return (qty_sold + qty, revenue + product.price * qty)
+            return acc
+
+        qty_sold, revenue = reduce(accumulate_sales, orders, (0, 0))
 
         return {
             "product_id": product.id,
@@ -103,9 +102,7 @@ async def customer_segmentation_async(
     async def segment_user(user: User) -> Tuple[str, str]:
         await asyncio.sleep(0.01)
 
-        user_orders = [
-            o for o in orders if o.user_id == user.id and o.status == "paid"
-        ]
+        user_orders = [o for o in orders if o.user_id == user.id and o.status == "paid"]
         order_count = len(user_orders)
         total_spent = reduce(lambda acc, o: acc + o.total, user_orders, 0)
 
@@ -124,12 +121,13 @@ async def customer_segmentation_async(
     tasks = [segment_user(u) for u in users]
     results = await asyncio.gather(*tasks)
 
-    # Группируем по сегментам
-    segments = defaultdict(list)
-    for segment, user_id in results:
-        segments[segment].append(user_id)
+    # Группируем по сегментам (иммутабельно через reduce)
+    def group_by_segment(acc: dict, item: Tuple[str, str]) -> dict:
+        segment, user_id = item
+        current_list = acc.get(segment, [])
+        return {**acc, segment: current_list + [user_id]}
 
-    return dict(segments)
+    return reduce(group_by_segment, results, {})
 
 
 # ============ Параллельная обработка пакетами ============
@@ -157,9 +155,7 @@ async def batch_process_orders(
         }
 
     # Разбиваем на батчи
-    batches = [
-        orders[i : i + batch_size] for i in range(0, len(orders), batch_size)
-    ]
+    batches = [orders[i : i + batch_size] for i in range(0, len(orders), batch_size)]
 
     # Обрабатываем параллельно
     tasks = [process_batch(batch) for batch in batches]

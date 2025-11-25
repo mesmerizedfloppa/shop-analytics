@@ -2,6 +2,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from core.domain import Cart, Order
 from core.transforms import (
     load_seed,
@@ -11,11 +12,8 @@ from core.transforms import (
     total_sales,
 )
 
-# еальные данные из seed.json
+# Реальные данные из seed.json
 categories, products, users, orders = load_seed("data/seed.json")
-
-# преобразование списка продуктов в словарь для быстрого доступа по id
-PRODUCTS_DICT = {p.id: p for p in products}
 
 
 def test_load_seed():
@@ -45,9 +43,17 @@ def test_remove_from_cart():
 
 
 def test_checkout_creates_order():
-    """Проверка создания заказа при оформлении корзины"""
+    """
+    Проверка создания заказа при оформлении корзины
+    ИСПРАВЛЕНО: checkout возвращает Either[dict, Order]
+    """
     cart = Cart(id="c1", user_id=users[0].id, items=((products[0].id, 2),))
-    order = checkout(cart, ts="2025-09-15T12:00:00", products=products)
+    result = checkout(cart, ts="2025-09-15T12:00:00", products=products)
+
+    # Проверяем Either
+    assert result.is_right
+    order = result.get_or_else(None)
+
     assert isinstance(order, Order)
     assert order.total == products[0].price * 2
     assert order.status == "paid"
@@ -57,8 +63,13 @@ def test_total_sales_reduce():
     """Проверка суммарных продаж"""
     cart1 = Cart(id="c1", user_id=users[0].id, items=((products[0].id, 1),))
     cart2 = Cart(id="c2", user_id=users[0].id, items=((products[1].id, 3),))
-    order1 = checkout(cart1, ts="2025-09-15T12:00:00", products=products)
-    order2 = checkout(cart2, ts="2025-09-15T13:00:00", products=products)
+
+    result1 = checkout(cart1, ts="2025-09-15T12:00:00", products=products)
+    result2 = checkout(cart2, ts="2025-09-15T13:00:00", products=products)
+
+    order1 = result1.get_or_else(None)
+    order2 = result2.get_or_else(None)
+
     total = total_sales((order1, order2))
     expected_total = (products[0].price * 1) + (products[1].price * 3)
     assert total == expected_total

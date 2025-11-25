@@ -26,9 +26,7 @@ def test_add_to_cart_event():
     bus = create_shop_event_bus()
     state = initial_state()
 
-    event = create_event(
-        "ADD_TO_CART", {"cart_id": "c1", "product_id": "p1", "qty": 2}
-    )
+    event = create_event("ADD_TO_CART", {"cart_id": "c1", "product_id": "p1", "qty": 2})
 
     new_state = bus.publish(event, state)
 

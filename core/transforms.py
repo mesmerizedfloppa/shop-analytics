@@ -54,8 +54,7 @@ def add_to_cart(cart: Cart, product_id: str, qty: int) -> Cart:
     if existing_item:
         # Обновляем количество существующего товара
         updated_items = tuple(
-            (pid, q + qty) if pid == product_id else (pid, q)
-            for pid, q in cart.items
+            (pid, q + qty) if pid == product_id else (pid, q) for pid, q in cart.items
         )
     else:
         # Добавляем новый товар
@@ -73,9 +72,7 @@ def remove_from_cart(cart: Cart, product_id: str) -> Cart:
 # ============ Checkout с Either для безопасности ============
 
 
-def checkout(
-    cart: Cart, ts: str, products: Tuple[Product, ...]
-) -> Either[dict, Order]:
+def checkout(cart: Cart, ts: str, products: Tuple[Product, ...]) -> Either[dict, Order]:
     """
     Оформляет корзину → Either[error, Order]
     Left(error) если товар не найден
@@ -161,6 +158,7 @@ def top_products(
     Топ-K товаров по продажам (только paid заказы)
     Кэшируется через lru_cache
     """
+
     # Агрегация продаж через reduce
     def accumulate_sales(sales_dict: dict, order: Order):
         if order.status != "paid":
