@@ -1,29 +1,21 @@
+from functools import reduce
+from typing import Tuple
+from core.domain import Category, Product, Order
 from core.transforms import total_sales
 from core.recursion import flatten_categories, collect_products_recursive
 from core.lazy import iter_orders_by_day, lazy_top_customers
-from core.compose import pipe, compose
-from typing import Tuple
-from core.domain import Category, Product, Order
+from core.compose import pipe
 
 
 class CatalogService:
-    """
-    Фасад для работы с каталогом
-    Методы - композиции чистых функций
-    """
+    """Фасад для работы с каталогом"""
 
-    def __init__(
-        self, categories: Tuple[Category, ...], products: Tuple[Product, ...]
-    ):
+    def __init__(self, categories: Tuple[Category, ...], products: Tuple[Product, ...]):
         self.categories = categories
         self.products = products
 
     def products_by_category(self, root_id: str) -> Tuple[Product, ...]:
-        """
-        Возвращает все товары категории и её подкатегорий
-        Композиция: flatten → collect
-        """
-        # ИСПРАВЛЕНО: правильная композиция без лишних lambda
+        """Возвращает все товары категории и её подкатегорий"""
         return collect_products_recursive(self.categories, self.products, root_id)
 
     def filter_products(self, predicate) -> Tuple[Product, ...]:
@@ -36,10 +28,7 @@ class CatalogService:
 
 
 class OrderService:
-    """
-    Фасад для работы с заказами
-    Использует ленивые вычисления
-    """
+    """Фасад для работы с заказами"""
 
     def __init__(self, orders: Tuple[Order, ...]):
         self.orders = orders
@@ -62,10 +51,7 @@ class OrderService:
 
 
 class AnalyticsService:
-    """
-    Аналитический фасад
-    Композирует функции из CatalogService и OrderService
-    """
+    """Аналитический фасад"""
 
     def __init__(self, catalog_service: CatalogService, order_service: OrderService):
         self.catalog = catalog_service
@@ -74,13 +60,15 @@ class AnalyticsService:
     def daily_report(self, day: str) -> dict:
         """
         Дневной отчёт через композицию чистых функций
-        Pipeline: orders → filter → aggregate → top customers
+        ИСПРАВЛЕНО: правильный порядок функций в compose
         """
-        # Получаем заказы за день
         day_orders = self.orders.orders_by_day(day)
 
-        # Композиция: фильтрация → агрегация
-        sales_pipeline = compose(
+        # ИСПРАВЛЕНО: compose применяет функции справа налево
+        # compose(f, g)(x) = f(g(x))
+        # Нам нужно: сначала отфильтровать, потом посчитать
+        # Поэтому используем pipe вместо compose
+        sales_pipeline = pipe(
             lambda orders: tuple(filter(lambda o: o.status == "paid", orders)),
             total_sales,
         )
@@ -94,28 +82,23 @@ class AnalyticsService:
         }
 
     def category_sales_report(self, category_id: str) -> dict:
-        """
-        Отчёт по продажам категории
-        """
-        # Получаем товары категории
+        """Отчёт по продажам категории"""
         category_products = self.catalog.products_by_category(category_id)
         product_ids = {p.id for p in category_products}
 
-        # Фильтруем заказы с товарами из категории
         def has_category_products(order: Order) -> bool:
             return any(pid in product_ids for pid, _ in order.items)
 
-        relevant_orders = tuple(filter(has_category_products, self.orders.paid_orders()))
+        relevant_orders = tuple(
+            filter(has_category_products, self.orders.paid_orders())
+        )
 
-        # Вычисляем продажи только по товарам категории
         def category_total(order: Order) -> int:
             return sum(
                 qty * next((p.price for p in category_products if p.id == pid), 0)
                 for pid, qty in order.items
                 if pid in product_ids
             )
-
-        from functools import reduce
 
         total = reduce(lambda acc, o: acc + category_total(o), relevant_orders, 0)
 
@@ -127,20 +110,21 @@ class AnalyticsService:
         }
 
     def user_retention_report(self) -> dict:
-        """
-        Отчёт по повторным покупкам
-        Pipeline: group by user → count orders → filter repeat customers
-        """
-        from collections import defaultdict
+        """Отчёт по повторным покупкам"""
 
-        # Группируем заказы по пользователям
-        user_orders = defaultdict(list)
-        for order in self.orders.paid_orders():
-            user_orders[order.user_id].append(order)
+        # Группируем заказы по пользователям через reduce
+        def group_by_user(acc: dict, order: Order) -> dict:
+            if order.status != "paid":
+                return acc
+            user_orders = acc.get(order.user_id, [])
+            return {**acc, order.user_id: user_orders + [order]}
 
-        # Считаем метрики
+        user_orders = reduce(group_by_user, self.orders.orders, {})
+
         total_users = len(user_orders)
-        repeat_customers = sum(1 for orders in user_orders.values() if len(orders) > 1)
+        repeat_customers = sum(
+            1 for orders_list in user_orders.values() if len(orders_list) > 1
+        )
         retention_rate = (
             (repeat_customers / total_users * 100) if total_users > 0 else 0
         )
@@ -150,6 +134,6 @@ class AnalyticsService:
             "repeat_customers": repeat_customers,
             "retention_rate": round(retention_rate, 2),
             "orders_per_user": {
-                uid: len(orders) for uid, orders in user_orders.items()
+                uid: len(orders_list) for uid, orders_list in user_orders.items()
             },
         }

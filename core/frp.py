@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Callable, Dict, List, Tuple
+from typing import Callable, Tuple
 from .domain import Event
 import uuid
 from datetime import datetime
@@ -92,7 +92,12 @@ def handle_checkout(event: Event, state: dict) -> dict:
     user_id = event.payload.get("user_id")
 
     current_sales = state.get("current_sales", [])
-    new_sale = {"order_id": order_id, "total": total, "user_id": user_id, "ts": event.ts}
+    new_sale = {
+        "order_id": order_id,
+        "total": total,
+        "user_id": user_id,
+        "ts": event.ts,
+    }
 
     return {
         **state,
