@@ -1,4 +1,14 @@
+# UI Framework
 streamlit>=1.49.1
+
+# Testing
 pytest>=8.4.2
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0
+
+# Code Quality
 black>=25.1.0
 ruff>=0.13.0
+
+# Type Checking (optional)
+mypy>=1.8.0
